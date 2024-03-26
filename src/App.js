@@ -1,8 +1,11 @@
-
-import Layout from './components/Layout'
+import { Provider } from "react-redux";
+import Layout from "./components/Layout";
+import appStore from "./Redux/store";
 function App() {
   return (
-   <Layout/>
+    <Provider store={appStore}>
+      <Layout />
+    </Provider>
   );
 }
 
