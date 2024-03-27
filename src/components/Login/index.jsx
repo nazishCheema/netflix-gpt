@@ -7,12 +7,11 @@ import {
   updateProfile,
 } from "firebase/auth";
 import auth from "../../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../Redux/userSlice";
+import { BACKGROUND_IMAGE, PHOTO_URL } from "../../constants";
 
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(``);
@@ -28,55 +27,52 @@ const Login = () => {
       isSignIn
     );
     setErrorMessage(message);
-    if (errorMessage) return;
-
-    if (!isSignIn) {
-      createUserWithEmailAndPassword(
-        auth,
-        emailRef?.current?.value,
-        passwordRef?.current?.value
-      )
-        .then((userCredential) => {
-          const user = userCredential.user;
-          updateProfile(user, {
-            displayName: nameRef?.current?.value,
-            photoURL: "https://example.com/jane-q-user/profile.jpg",
-          })
-            .then(() => {
-              const user = auth?.currentUser;
-              dispatch(
-                addUser({
-                  uId: user?.uid,
-                  email: user?.email,
-                  displayName: user?.displayName,
-                  photoURL: user?.photoURL,
-                })
-              );
-              navigate(`/browse`);
+    if (!errorMessage) {
+      if (!isSignIn) {
+        createUserWithEmailAndPassword(
+          auth,
+          emailRef?.current?.value,
+          passwordRef?.current?.value
+        )
+          .then((userCredential) => {
+            const user = userCredential.user;
+            updateProfile(user, {
+              displayName: nameRef?.current?.value,
+              photoURL: PHOTO_URL,
             })
-            .catch((error) => {
-              setErrorMessage(error);
-            });
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMsg = error.message;
-          setErrorMessage(errorCode + errorMsg);
-        });
-    } else {
-      signInWithEmailAndPassword(
-        auth,
-        emailRef?.current?.value,
-        passwordRef?.current?.value
-      )
-        .then(() => {
-          navigate(`/browse`);
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMsg = error.message;
-          setErrorMessage(errorCode + errorMsg);
-        });
+              .then(() => {
+                const user = auth?.currentUser;
+                dispatch(
+                  addUser({
+                    uId: user?.uid,
+                    email: user?.email,
+                    displayName: user?.displayName,
+                    photoURL: user?.photoURL,
+                  })
+                );
+              })
+              .catch((error) => {
+                setErrorMessage(error);
+              });
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMsg = error.message;
+            setErrorMessage(errorCode + errorMsg);
+          });
+      } else {
+        signInWithEmailAndPassword(
+          auth,
+          emailRef?.current?.value,
+          passwordRef?.current?.value
+        )
+          .then(() => {})
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMsg = error.message;
+            setErrorMessage(errorCode + errorMsg);
+          });
+      }
     }
   };
 
@@ -84,10 +80,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute ">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/9d3533b2-0e2b-40b2-95e0-ecd7979cc88b/ca77f965-b83c-4616-93a3-a2f8fabb378c/PK-en-20240311-popsignuptwoweeks-perspective_alpha_website_small.jpg"
-          alt="background"
-        />
+        <img src={BACKGROUND_IMAGE} alt="background" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
