@@ -28,10 +28,10 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="  pt-[8%] flex items-center justify-center ">
+    <div className="  md:pt-[8%] pt-[50%] flex items-center justify-center ">
       <form
         onSubmit={(e) => e?.preventDefault()}
-        className="grid grid-cols-12 bg-black  w-1/2 bg-opacity-40"
+        className="grid grid-cols-12 bg-black w-screen  md:w-1/2 bg-opacity-40"
       >
         <input
           ref={searchRef}

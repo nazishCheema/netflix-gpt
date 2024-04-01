@@ -6,8 +6,12 @@ import { BACKGROUND_IMAGE } from "../../constants";
 const Search = () => {
   return (
     <div>
-      <div className="absolute -z-10">
-        <img src={BACKGROUND_IMAGE} alt="background" />
+      <div className="fixed -z-10">
+        <img
+          className="h-screen w-screen object-cover "
+          src={BACKGROUND_IMAGE}
+          alt="background"
+        />
       </div>
       <SearchBar />
       <MovieSuggestions />

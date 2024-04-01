@@ -10,8 +10,7 @@ export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZGMzZDg3YjNhZmM2YWU2YzA2ZGRhOTFhMjIyZTMzMSIsInN1YiI6IjY2MDNlMWJjZDM4YjU4MDE3ZDFjMDY0NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1KJpto-yRJ4e4xZxmJuVt9066iI6z5YpqfWdusZ7iRU",
+    Authorization: `Bearer ${process.env.REACT_APP_TMDB_KEY} `,
   },
 };
 
@@ -21,4 +20,4 @@ export const langOptions = [
   { name: `Korean`, value: `korean` },
 ];
 
-export const OPENAI_KEY = `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`;
+export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
