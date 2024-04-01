@@ -6,8 +6,13 @@ import SecondaryContainer from "../SecondaryContainer";
 import usePopularMovies from "../../hooks/usePopularMovies";
 import useTopRatedMovies from "../../hooks/useTopRatedMovies";
 import useUpComingMovies from "../../hooks/useUpComingMovies";
+import { useSelector } from "react-redux";
+import Search from "../Search";
+import PlayMovie from "../PlayMovie";
 
 const Browse = () => {
+  const searchView = useSelector((store) => store?.search?.toggleSearch);
+  const movieView = useSelector((store) => store?.movies?.toggleMovie);
   useNowPlaying();
   usePopularMovies();
   useTopRatedMovies();
@@ -15,8 +20,16 @@ const Browse = () => {
   return (
     <div>
       <Header />
-      <MainContainer />
-      <SecondaryContainer />
+      {searchView ? (
+        <Search />
+      ) : movieView ? (
+        <PlayMovie />
+      ) : (
+        <>
+          <MainContainer />
+          <SecondaryContainer />
+        </>
+      )}
     </div>
   );
 };

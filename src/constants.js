@@ -14,3 +14,11 @@ export const API_OPTIONS = {
       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZGMzZDg3YjNhZmM2YWU2YzA2ZGRhOTFhMjIyZTMzMSIsInN1YiI6IjY2MDNlMWJjZDM4YjU4MDE3ZDFjMDY0NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1KJpto-yRJ4e4xZxmJuVt9066iI6z5YpqfWdusZ7iRU",
   },
 };
+
+export const langOptions = [
+  { name: `English`, value: `en` },
+  { name: `Urdu`, value: `urdu` },
+  { name: `Korean`, value: `korean` },
+];
+
+export const OPENAI_KEY = `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`;
