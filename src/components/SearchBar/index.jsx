@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import preferedLang from "../../utils/preferedLang";
 import { API_OPTIONS } from "../../constants";
@@ -8,6 +8,7 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const langKey = useSelector((store) => store?.config?.preferedLang);
   const searchRef = useRef(null);
+  const [loading, setLoading] = useState(false);
 
   // const handleSearchResult = async () => {
   //   const searchContent = `Act as a movie recommendation system and suggest some movie fro the query ${searchRef?.current?.value} and only give me name of 5 movies`;
@@ -19,12 +20,14 @@ const SearchBar = () => {
   // };
 
   const handleSearchResult = async () => {
+    setLoading(true);
     const data = await fetch(
       `https://api.themoviedb.org/3/search/movie?query=${searchRef?.current?.value}&include_adult=false&language=&page=1`,
       API_OPTIONS
     );
     const json = await data.json();
     dispatch(addSearchResult(json?.results));
+    setLoading(false);
   };
 
   return (
@@ -43,7 +46,7 @@ const SearchBar = () => {
           className="bg-red-700 text-white py-2 rounded-md m-2 col-span-3"
           onClick={handleSearchResult}
         >
-          🔎 {preferedLang[langKey]?.search}
+          {loading ? `loading..` : `🔎 ${preferedLang[langKey]?.search}`}
         </button>
       </form>
     </div>

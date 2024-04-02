@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const MovieSuggestions = () => {
   const moviesResult = useSelector((store) => store?.search?.searchResult);
-  if (!moviesResult) return;
+  if (moviesResult?.length === 0) return;
   return (
     <div>
       <MovieList title={`Results`} movies={moviesResult} />

@@ -18,8 +18,10 @@ const Login = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const nameRef = useRef(null);
+  const [loading, setLoading] = useState(false);
 
   const handleForm = () => {
+    setLoading(true);
     const message = inputValidation(
       emailRef?.current?.value,
       passwordRef?.current?.value,
@@ -50,6 +52,7 @@ const Login = () => {
                     photoURL: user?.photoURL,
                   })
                 );
+                setLoading(false);
               })
               .catch((error) => {
                 setErrorMessage(error);
@@ -66,7 +69,9 @@ const Login = () => {
           emailRef?.current?.value,
           passwordRef?.current?.value
         )
-          .then(() => {})
+          .then(() => {
+            setLoading(false);
+          })
           .catch((error) => {
             const errorCode = error.code;
             const errorMsg = error.message;
@@ -120,7 +125,7 @@ const Login = () => {
           onClick={handleForm}
           className="p-2 my-2 w-full bg-red-700 rounded-sm"
         >
-          {isSignIn ? `Sign In` : `Sign Up`}
+          {loading ? `loading` : isSignIn ? `Sign In` : `Sign Up`}
         </button>
         <p
           className="cursor-pointer py-2"
