@@ -16,6 +16,7 @@ const useTopRatedMovies = () => {
   };
   useEffect(() => {
     !is_topRated && getTopRatedMovies();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 export default useTopRatedMovies;

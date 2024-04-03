@@ -16,6 +16,7 @@ const useUpComingMovies = () => {
   };
   useEffect(() => {
     !is_upComing && getUpComingMovies();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 export default useUpComingMovies;

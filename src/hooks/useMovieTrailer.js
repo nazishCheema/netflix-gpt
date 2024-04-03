@@ -20,8 +20,10 @@ const useMovieTrailer = (movieId) => {
     const trailer = filteredData ? filteredData[0] : json?.results[0];
     dispatch(addTrailer(trailer));
   };
+
   useEffect(() => {
     !isTrailer && getMovieTrailer();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 export default useMovieTrailer;

@@ -23,6 +23,7 @@ const useMovieVideo = (movieId) => {
     return () => {
       dispatch(addSelectedMovieTrailer(null));
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 export default useMovieVideo;
