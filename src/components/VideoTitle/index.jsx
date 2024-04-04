@@ -7,8 +7,8 @@ const VideoTitle = ({ title, overview }) => {
       <p className="my-4 hidden md:inline-block  md:w-1/3 text-justify text-lg">
         {overview}
       </p>
-      <div className="mt-4 md:mt-0">
-        <button className="bg-white text-black py-2 px-4 mx-4 rounded-lg">
+      <div className="mt-4 md:mt-0 hidden md:block">
+        <button className="bg-white text-black py-2 px-4 mx-4 rounded-lg ">
           ▶ Play
         </button>
         <button className="bg-gray-700 text-white p-2 mx-4 rounded-lg bg-opacity-35">

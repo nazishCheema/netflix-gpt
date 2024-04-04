@@ -55,6 +55,7 @@ const Login = () => {
                 setLoading(false);
               })
               .catch((error) => {
+                setLoading(false);
                 setErrorMessage(error);
               });
           })
@@ -73,6 +74,7 @@ const Login = () => {
             setLoading(false);
           })
           .catch((error) => {
+            setLoading(false);
             const errorCode = error.code;
             const errorMsg = error.message;
             setErrorMessage(errorCode + errorMsg);
